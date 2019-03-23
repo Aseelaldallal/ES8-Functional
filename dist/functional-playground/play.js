@@ -44,5 +44,16 @@ var books = [
         ] }
 ];
 var bookDetails = arrayUtils.flatten(arrayUtils.map(books, function (category) { return category.bookDetails; }));
-console.log(bookDetails);
+var total = arrayUtils.reduce(bookDetails, function (accumulator, currentValue) {
+    var reviews = currentValue.reviews.length > 0 ? currentValue.reviews[0] : null;
+    if (reviews) {
+        for (var key in reviews) {
+            if (key === "good" || key === "excellent") {
+                accumulator[key] += reviews[key];
+            }
+        }
+    }
+    return accumulator;
+}, { good: 0, excellent: 0 });
+console.log(total);
 //# sourceMappingURL=play.js.map
