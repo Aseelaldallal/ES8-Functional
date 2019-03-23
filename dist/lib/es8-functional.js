@@ -49,3 +49,56 @@ exports.sortBy = function (property) {
         return 0;
     };
 };
+exports.tap = function (value) {
+    return function (fn) {
+        (fn(value),
+            console.log(value));
+    };
+};
+exports.unary = function (fn) {
+    return fn.length === 1 ? fn : function (args) { return fn(args); };
+};
+exports.once = function (fn) {
+    var done = false;
+    return function () {
+        if (done) {
+            return undefined;
+        }
+        else {
+            done = true;
+            return fn.apply(this, [arguments]);
+        }
+    };
+};
+exports.memoized = function (fn) {
+    var lookupTable = {};
+    return function (arg) { return lookupTable[arg] || (lookupTable[arg] = fn(arg)); };
+};
+function objectAssign() {
+    var data = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        data[_i] = arguments[_i];
+    }
+    var to = {};
+    for (var i = 0; i < arguments.length; i++) {
+        var obj = arguments[i];
+        var keys = Object.keys(obj);
+        for (var j = 0; j < keys.length; j++) {
+            var currKey = keys[j];
+            to[currKey] = obj[currKey];
+        }
+    }
+    return to;
+}
+exports.objectAssign = objectAssign;
+function objectEntries(obj) {
+    return function (index) {
+        if (index > Object.keys(obj).length - 1) {
+            return;
+        }
+        var key = Object.keys(obj)[index];
+        var value = obj[key];
+        return [key, value];
+    };
+}
+exports.objectEntries = objectEntries;

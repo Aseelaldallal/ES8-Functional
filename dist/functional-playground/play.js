@@ -7,23 +7,41 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var funcs = __importStar(require("../lib/es8-functional.js"));
-// let array = [1,2,3];
-// funcs.forEach(array, (data: any)=> console.log(data));
-// let object = { a: 1, b: 2}
-// funcs.forEachObject(object, (k: any,v: any) => {
-//     console.log(k + " : " + v);
-// })
-// funcs.times(100, (num: any) => {
-//     funcs.unless((num % 2), () => {
-//         console.log(num + " is even");
-//     });
-// });
-// console.log(funcs.some([4, 4, NaN], isNaN)); 
-var people = [
-    { firstName: 'a', lastName: 'b' },
-    { firstName: 'c', lastName: 'a' },
-    { firstName: 'b', lastName: 'c' }
+var arrayUtils = __importStar(require("../lib/array_utils.js"));
+var books = [
+    { name: "beginners",
+        bookDetails: [
+            {
+                "id": 333,
+                "title": "Angular",
+                "author": "Hadeel",
+                "rating": [4.0],
+                "reviews": []
+            },
+            {
+                "id": 444,
+                "title": "Wack",
+                "author": "Mo",
+                "rating": [4.7],
+                "reviews": [{ good: 4, excellent: 12 }]
+            },
+        ] },
+    { name: "pro",
+        bookDetails: [{
+                "id": 111,
+                "title": "ProHello",
+                "author": "Aseel",
+                "rating": [4.4],
+                "reviews": [{ good: 4, excellent: 12 }]
+            },
+            {
+                "id": 222,
+                "title": "ProMachines",
+                "author": "Pouria",
+                "rating": [4.3],
+                "reviews": []
+            }
+        ] }
 ];
-var x = people.sort(funcs.sortBy('lastName'));
-console.log(funcs.sortBy('firstName'));
+var bookDetails = arrayUtils.flatten(arrayUtils.map(books, function (category) { return category.bookDetails; }));
+console.log(bookDetails);

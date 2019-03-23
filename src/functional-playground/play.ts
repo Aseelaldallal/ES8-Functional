@@ -1,28 +1,43 @@
 
 import * as funcs from '../lib/es8-functional.js';
+import * as arrayUtils from '../lib/array_utils.js';
 
-
-// let array = [1,2,3];
-// funcs.forEach(array, (data: any)=> console.log(data));
-
-// let object = { a: 1, b: 2}
-// funcs.forEachObject(object, (k: any,v: any) => {
-//     console.log(k + " : " + v);
-// })
-
-// funcs.times(100, (num: any) => {
-//     funcs.unless((num % 2), () => {
-//         console.log(num + " is even");
-//     });
-// });
-
-// console.log(funcs.some([4, 4, NaN], isNaN)); 
-
-let people = [
-    {firstName: 'a', lastName: 'b'},
-    {firstName: 'c', lastName: 'a'},
-    {firstName: 'b', lastName: 'c'}
+let books = [
+    {   name: "beginners",
+        bookDetails: [
+        {
+            "id": 333,
+            "title": "Angular",
+            "author": "Hadeel",
+            "rating": [4.0],
+            "reviews": []
+        },
+        {
+            "id": 444,
+            "title": "Wack",
+            "author": "Mo",
+            "rating": [4.7],
+            "reviews": [{good: 4, excellent: 12}]
+        },
+    ]},
+    {   name: "pro",
+        bookDetails: [{
+            "id": 111,
+            "title": "ProHello",
+            "author": "Aseel",
+            "rating": [4.4],
+            "reviews": [{good: 4, excellent: 12}]
+        },
+        {
+            "id": 222,
+            "title": "ProMachines",
+            "author": "Pouria",
+            "rating": [4.3],
+            "reviews": []
+        }
+    ]}
 ]
 
-let x = people.sort(funcs.sortBy('lastName'));
-console.log(funcs.sortBy('firstName'));
+
+let bookDetails = arrayUtils.flatten(arrayUtils.map(books, category => category.bookDetails));
+console.log(bookDetails);
