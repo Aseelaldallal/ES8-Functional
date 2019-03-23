@@ -67,3 +67,4 @@ exports.reduce = function (array, fn, initialValue) {
 //     return accumulator;
 // })
 // console.log(sum);
+//# sourceMappingURL=array_utils.js.map

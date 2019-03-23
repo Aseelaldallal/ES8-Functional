@@ -102,3 +102,4 @@ function objectEntries(obj) {
     };
 }
 exports.objectEntries = objectEntries;
+//# sourceMappingURL=es8-functional.js.map

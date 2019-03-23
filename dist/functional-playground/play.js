@@ -45,3 +45,4 @@ var books = [
 ];
 var bookDetails = arrayUtils.flatten(arrayUtils.map(books, function (category) { return category.bookDetails; }));
 console.log(bookDetails);
+//# sourceMappingURL=play.js.map
