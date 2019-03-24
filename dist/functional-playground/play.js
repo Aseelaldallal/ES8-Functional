@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -7,6 +18,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var funcs = __importStar(require("../lib/es8-functional.js"));
 var arrayUtils = __importStar(require("../lib/array_utils.js"));
 var books = [
     { name: "beginners",
@@ -16,14 +28,12 @@ var books = [
                 "title": "Angular",
                 "author": "Hadeel",
                 "rating": [4.0],
-                "reviews": []
             },
             {
                 "id": 444,
                 "title": "Wack",
                 "author": "Mo",
                 "rating": [4.7],
-                "reviews": [{ good: 4, excellent: 12 }]
             },
         ] },
     { name: "pro",
@@ -32,28 +42,40 @@ var books = [
                 "title": "ProHello",
                 "author": "Aseel",
                 "rating": [4.4],
-                "reviews": [{ good: 4, excellent: 12 }]
             },
             {
                 "id": 222,
                 "title": "ProMachines",
                 "author": "Pouria",
-                "rating": [4.3],
-                "reviews": []
+                "rating": [4.3]
             }
         ] }
 ];
+var reviewDetails = [
+    {
+        id: 111,
+        reviews: [{ good: 4, excellent: 19 }]
+    },
+    {
+        id: 222,
+        reviews: []
+    },
+    {
+        id: 333,
+        reviews: []
+    },
+    {
+        id: 444,
+        reviews: [{ good: 1, excellent: 9 }]
+    },
+];
 var bookDetails = arrayUtils.flatten(arrayUtils.map(books, function (category) { return category.bookDetails; }));
-var total = arrayUtils.reduce(bookDetails, function (accumulator, currentValue) {
-    var reviews = currentValue.reviews.length > 0 ? currentValue.reviews[0] : null;
-    if (reviews) {
-        for (var key in reviews) {
-            if (key === "good" || key === "excellent") {
-                accumulator[key] += reviews[key];
-            }
-        }
+var bSorted = bookDetails.sort(funcs.sortBy("id"));
+var rSorted = reviewDetails.sort(funcs.sortBy("id"));
+var merged = arrayUtils.zip(bSorted, rSorted, function (bd, rd) {
+    if (bd.id === rd.id) {
+        return __assign({}, bd, rd);
     }
-    return accumulator;
-}, { good: 0, excellent: 0 });
-console.log(total);
+});
+console.log(merged);
 //# sourceMappingURL=play.js.map

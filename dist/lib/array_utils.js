@@ -61,10 +61,11 @@ exports.reduce = function (array, fn, initialValue) {
     }
     return [accumulator];
 };
-// let a = [1,2,3,4,5];
-// let sum = a.reduce((accumulator: number, currValue: number) => {
-//     accumulator += currValue;
-//     return accumulator;
-// })
-// console.log(sum);
+exports.zip = function (arr1, arr2, fn) {
+    var results = [];
+    for (var i = 0; i < Math.min(arr1.length, arr2.length); i++) {
+        results.push(fn(arr1[i], arr2[i]));
+    }
+    return results;
+};
 //# sourceMappingURL=array_utils.js.map
