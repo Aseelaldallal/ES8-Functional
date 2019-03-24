@@ -10,14 +10,12 @@ let books = [
             "title": "Angular",
             "author": "Hadeel",
             "rating": [4.0],
-            "reviews": []
         },
         {
             "id": 444,
             "title": "Wack",
             "author": "Mo",
             "rating": [4.7],
-            "reviews": [{good: 4, excellent: 12}]
         },
     ]},
     {   name: "pro",
@@ -26,18 +24,42 @@ let books = [
             "title": "ProHello",
             "author": "Aseel",
             "rating": [4.4],
-            "reviews": [{good: 4, excellent: 12}]
         },
         {
             "id": 222,
             "title": "ProMachines",
             "author": "Pouria",
-            "rating": [4.3],
-            "reviews": []
+            "rating": [4.3]
         }
     ]}
 ]
 
+let reviewDetails = [
+    {
+        id: 111,
+        reviews: [{good: 4, excellent: 19}]
+    },
+    {
+        id: 222,
+        reviews: []
+    },
+    {
+        id: 333,
+        reviews: []
+    },
+    {
+        id: 444,
+        reviews: [{good: 1, excellent: 9}]
+    },
+];
 
 let bookDetails = arrayUtils.flatten(arrayUtils.map(books, category => category.bookDetails));
-console.log(bookDetails);
+let bSorted = bookDetails.sort(funcs.sortBy("id"));
+let rSorted = reviewDetails.sort(funcs.sortBy("id"));
+
+let merged = arrayUtils.zip(bSorted, rSorted, (bd, rd)=> {
+    if(bd.id === rd.id) {
+        return {...bd, ...rd};
+    }
+});
+console.log(merged);

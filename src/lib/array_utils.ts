@@ -1,3 +1,5 @@
+import { forEach } from "./es8-functional";
+
 export const map = (arr: any[], fn: (elem: any) => any) => {
     let result = [];
     for(const element of arr) {
@@ -55,9 +57,10 @@ export const reduce = (array: any, fn: (accumulator: any, currValue: any) => any
     return [accumulator];
 }
 
-// let a = [1,2,3,4,5];
-// let sum = a.reduce((accumulator: number, currValue: number) => {
-//     accumulator += currValue;
-//     return accumulator;
-// })
-// console.log(sum);
+export const zip = (arr1: any[], arr2: any[], fn: (a: any, b: any) => any) => {
+    let results = [];
+    for(let i = 0; i<Math.min(arr1.length, arr2.length); i++) {
+        results.push(fn(arr1[i], arr2[i]));
+    }
+    return results;
+}
